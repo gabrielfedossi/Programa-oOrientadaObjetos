@@ -20,4 +20,3 @@ cachorro = Cachorro("Bidu", "Dobberman", "Preto", 2) # bilu e bidu sao objts da 
 
 
 cachorro.descricao()
-print(cachorro.raca)
