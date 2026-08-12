@@ -101,6 +101,47 @@ while True:
 
         playlist_atual.adicionar_musica(musica_escolhida)
 
+
+    elif op == 5:
+        if not playlist:
+            print("Nenhuma playlist cadastrada.")
+            continue
+
+        nome_das_play = list(playlist.keys())
+
+        print("\nPlaylist:")
+        for i, c in enumerate(nome_das_play):
+            print(f"{i} - {c}")
+
+        while True:
+            try:
+                escolha_play = int(input("Escolha a playlist: "))
+                if 0 <= escolha_play < len(nome_das_play):
+                    break
+                print("\nNumero inválido")
+            except ValueError:
+                print("\nDigite um valor correto!")
+
+        nome_escolhido = nome_das_play[escolha_play]
+        playlist_atual : Playlist = playlist[nome_escolhido]
+
+        if not playlist_atual.musicas:
+            print("Esta playlist está vazia.")
+            continue
+
+        playlist_atual.listar_musicas()
+
+        while True:
+            try:
+                indice = int(input("Escolha o índice da música para remover: "))
+                if 0 <= indice < len(playlist_atual.musicas):
+                    break
+                print("Número inválido")
+            except ValueError:
+                print("\nDigite um valor correto!")
+
+        playlist_atual.remover_musica(indice)    
+
     elif op == 6:
 
         if not playlist:
@@ -125,4 +166,27 @@ while True:
         playlist_atual : Playlist = playlist[nome_escolhido]
 
         playlist_atual.listar_musicas()
-        
+
+    elif op == 7:
+        if not musicas:
+            print("Nenhuma música cadastrada.")
+            continue
+
+        termo = input("Digite o nome (ou parte do nome) da música: ").lower()
+
+        resultados = []
+        for m in musicas:
+            if termo in m.nome.lower():
+                resultados.append(m)
+
+        if not resultados:
+            print("\nNenhuma música encontrada.")
+        else:
+            print("\nResultados encontrados:")
+            for i, m in enumerate(resultados):
+                print(f"{i} - {m.nome} | Artista: {m.artista} | Álbum: {m.album} | Duração: {m.duracao} min")
+
+    elif op == 0:
+        break
+    else:
+        print("Insira uma opção válida")    
